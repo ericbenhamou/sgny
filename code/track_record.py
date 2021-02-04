@@ -102,6 +102,34 @@ volTarget = 0.05
 # do voltargetting
 track_record, strat_returns, weights = compute_strategy(prices, dfWeights, cost, 
         volTarget = volTarget, bPlot=False, isReturns=False, return_only_strategy=False)
+track_record.name = 'AI for Alpha'
 
-track_record.plot()
-print(track_record.iloc[-1])
+df_benchmark = read_data('benchmark.csv')
+df_benchmark = df_benchmark.reindex(track_record.index).fillna(method='ffill').fillna(method='bfill')
+df_benchmark = df_benchmark/df_benchmark.iloc[0]
+df_benchmark.columns = ['Benchmark']
+
+total_df = pd.concat([track_record, df_benchmark], axis=1)
+#%%
+SGColors = {'SG_Beige': "#D6C292",
+                'SG_Black': "#17202A",
+                'SG_Brown': "#7B1D21",
+                'SG_Brown2': "#A66B02",
+                'SG_DarkBeige': "#BD9C4F",
+                'SG_DarkGrey': "#212F3D",
+                'SG_Green': "#2D575B",
+                'SG_Grey': "#C1BCBC",
+                'SG_Grey2': "#938A8A",
+                'SG_LightTeal': "#B8D8DC",
+                'SG_MidGrey': "#566573",
+                'SG_Red': "#E60028",
+                'SG_Red2': "#D65258",
+                'SG_Teal': "#519BA5",
+                'SG_Tomato': "#E38A8E",
+                'SG_LightGrey': "#D3D3D3"}    
+total_df.plot(figsize=(12,6), color =[SGColors['SG_Red'], 
+            SGColors['SG_Brown']],
+    fontsize=14,)
+
+print('last values')
+print(total_df.iloc[-1])
