@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Feb  4 16:56:55 2021
-
-@author: eric.benhamou
-"""
-
-# -*- coding: utf-8 -*-
-"""
-
-Ai Square Connect
+Ai for Alpha
 Copyright Thu Aug  2021
-
-
 """
 
 import pandas as pd
